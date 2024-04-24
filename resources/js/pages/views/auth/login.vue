@@ -1,27 +1,45 @@
 <script setup>
 import { reactive, ref, onMounted } from "vue";
 import router from "./../../../router/index.js"
+import IsLoading from '../../components/IsLoading.vue'
+
 
 let form = reactive({
     email: "",
     password: "",
 });
 
+const isLoading = ref(false);
+
 const login = async () => {
+    isLoading.value = true; // Activation du chargement
+
     await axios.post("/api/login", form).then((response) => {
         if (response.data.success) {
+            isLoading.value = false; // Désactivation du chargement
+
             sessionStorage.setItem("token", response.data.data.token);
             router.push("/dashboad/statistic");
+
             toast.fire({
                 icon: "success",
                 title: "Connexion réussie",
             });
+
         } else {
+            isLoading.value = false;
             toast.fire({
                 icon: "error",
                 title: response.data.message,
             });
         }
+    }).catch((error) => {
+        isLoading.value = false; // Désactivation du chargement en cas d'erreur
+        console.error('Error saving course:', error);
+        toast.fire({
+            icon: "error",
+            title: "Une erreur s'est produite lors de la sauvegarde du cours. Veuillez réessayer plus tard.",
+        });
     });
 };
 
@@ -79,7 +97,9 @@ const login = async () => {
                         <a href="#">Forgot Password?</a>
                     </div> -->
                     <div class="mt-5 text-center xl:mt-8 xl:text-left">
-                        <button data-tw-merge="" type="button" @click="login()" class="transition duration-200 border shadow-sm inline-flex items-center justify-center px-3 font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary rounded-full w-full bg-gradient-to-r from-theme-1/70 to-theme-2/70 py-3.5 xl:mr-3">Connexion</button>
+                       <IsLoading v-if="isLoading" />
+
+                        <button v-else data-tw-merge="" type="button" @click="login()" class="transition duration-200 border shadow-sm inline-flex items-center justify-center px-3 font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed bg-primary border-primary text-white dark:border-primary rounded-full w-full bg-gradient-to-r from-theme-1/70 to-theme-2/70 py-3.5 xl:mr-3">Connexion</button>
                         <!-- <button data-tw-merge="" class="transition duration-200 border shadow-sm inline-flex items-center justify-center px-3 font-medium cursor-pointer focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus-visible:outline-none dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&:hover:not(:disabled)]:bg-opacity-90 [&:hover:not(:disabled)]:border-opacity-90 [&:not(button)]:text-center disabled:opacity-70 disabled:cursor-not-allowed border-secondary text-slate-500 dark:border-darkmode-100/40 dark:text-slate-300 [&:hover:not(:disabled)]:bg-secondary/20 [&:hover:not(:disabled)]:dark:bg-darkmode-100/10 rounded-full mt-3 w-full bg-white/70 py-3.5">Sign Up</button> -->
                     </div>
                 </div>

@@ -203,7 +203,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to,from) =>{
-    if(to.meta.requiresAuth && !localStorage.getItem('token')){
+    if(to.meta.requiresAuth && !sessionStorage.getItem('token')){
         return { name: 'Login' }
     }
 
