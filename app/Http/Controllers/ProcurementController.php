@@ -33,8 +33,8 @@ class ProcurementController extends Controller
 
         $Procurement = new Procurement();
 
-        $Procurement->company_id = '1';
-        // $Procurement->company_id = Auth::user()->company_id;
+        $Procurement->company_id = Auth::user()->company_id;
+       
         $Procurement->date_procurement =  $request->date_procurement;
         $Procurement->quantity_procurement = $request->quantity_procurement;
         $Procurement->identity_procurement =  $request->identity_procurement;
@@ -80,8 +80,8 @@ class ProcurementController extends Controller
 
         $Procurement = Procurement::find($id);
 
-        $Procurement->company_id = '1';
-        // $Procurement->company_id = Auth::user()->company_id;
+        $Procurement->company_id = Auth::user()->company_id;
+       
         $Procurement->date_procurement =  $request->date_procurement;
         $Procurement->quantity_procurement = $request->quantity_procurement;
         $Procurement->identity_procurement =  $request->identity_procurement;
@@ -104,8 +104,8 @@ class ProcurementController extends Controller
 
     public function get_procurements_in_company(){
 
-        //$procurements = Procurement::where('company_id', Auth::user()->company_id)->with('vehicle')->get();
-        $procurements = Procurement::where('company_id', '1')->with('vehicle')->get();
+       
+        $procurements = Procurement::where('company_id', Auth::user()->company_id)->with('vehicle')->get();
 
         return $procurements;
 

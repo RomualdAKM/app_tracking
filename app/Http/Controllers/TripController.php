@@ -33,8 +33,8 @@ class TripController extends Controller
 
         $Trip = new Trip();
 
-        $Trip->company_id = '1';
-        // $Trip->company_id = Auth::user()->company_id;
+        $Trip->company_id = Auth::user()->company_id;
+     
         $Trip->place_of_departure_trip =  $request->place_of_departure_trip;
         $Trip->destination_trip = $request->destination_trip;
         $Trip->date_of_departure_trip =  $request->date_of_departure_trip;
@@ -78,8 +78,8 @@ class TripController extends Controller
 
         $Trip =  Trip::find($id);
 
-        $Trip->company_id = '1';
-        // $Trip->company_id = Auth::user()->company_id;
+        $Trip->company_id = Auth::user()->company_id;
+       
         $Trip->place_of_departure_trip =  $request->place_of_departure_trip;
         $Trip->destination_trip = $request->destination_trip;
         $Trip->date_of_departure_trip =  $request->date_of_departure_trip;
@@ -102,8 +102,8 @@ class TripController extends Controller
 
     public function get_trips_in_company(){
 
-        $Trips = Trip::where('company_id', '1')->with('vehicle')->get();
-       // $Trips = Trip::where('company_id', Auth::user()->company_id)->with('vehicle')->get();
+        $Trips = Trip::where('company_id', Auth::user()->company_id)->with('vehicle')->get();
+     
 
         return $Trips;
     }

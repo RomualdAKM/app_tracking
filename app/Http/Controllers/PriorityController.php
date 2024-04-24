@@ -41,8 +41,8 @@ class PriorityController extends Controller
         
         $Priority = new Priority();
 
-        $Priority->company_id = '1';
-        // $Priority->company_id = Auth::user()->company_id;
+       
+        $Priority->company_id = Auth::user()->company_id;
         $Priority->company_priority =  $request->company_priority;
         $Priority->date_priority = $request->date_priority;
         $Priority->type_priority =  "Assurance";
@@ -93,8 +93,8 @@ class PriorityController extends Controller
         
         $Priority = new Priority();
 
-        $Priority->company_id = '1';
-        // $Priority->company_id = Auth::user()->company_id;
+      
+        $Priority->company_id = Auth::user()->company_id;
         $Priority->company_priority =  $request->company_priority;
         $Priority->date_priority = $request->date_priority;
         $Priority->type_priority =  "Visite technique";
@@ -145,8 +145,8 @@ class PriorityController extends Controller
         
         $Priority = new Priority();
 
-        $Priority->company_id = '1';
-        // $Priority->company_id = Auth::user()->company_id;
+     
+        $Priority->company_id = Auth::user()->company_id;
         $Priority->company_priority =  $request->company_priority;
         $Priority->date_priority = $request->date_priority;
         $Priority->type_priority =  "TVM";
@@ -197,8 +197,8 @@ class PriorityController extends Controller
         
         $Priority =  Priority::find($id);
 
-        $Priority->company_id = '1';
-        // $Priority->company_id = Auth::user()->company_id;
+      
+        $Priority->company_id = Auth::user()->company_id;
         $Priority->company_priority =  $request->company_priority;
         $Priority->date_priority = $request->date_priority;
         // $Priority->type_priority =  "Assurance";
@@ -255,8 +255,8 @@ class PriorityController extends Controller
         
         $Priority =  Priority::find($id);
 
-        $Priority->company_id = '1';
-        // $Priority->company_id = Auth::user()->company_id;
+      
+         $Priority->company_id = Auth::user()->company_id;
         $Priority->company_priority =  $request->company_priority;
         $Priority->date_priority = $request->date_priority;
         // $Priority->type_priority =  "Assurance";
@@ -313,8 +313,8 @@ class PriorityController extends Controller
         
         $Priority =  Priority::find($id);
 
-        $Priority->company_id = '1';
-        // $Priority->company_id = Auth::user()->company_id;
+      
+       $Priority->company_id = Auth::user()->company_id;
         $Priority->company_priority =  $request->company_priority;
         $Priority->date_priority = $request->date_priority;
         // $Priority->type_priority =  "Assurance";
@@ -357,30 +357,24 @@ class PriorityController extends Controller
     }
     public function get_technical_inspections_in_company(){
 
-        $technical_inspections = Priority::where('company_id', '1')
+       
+        $technical_inspections = Priority::where('company_id', Auth::user()->company_id)
                                 ->where('type_priority','Visite technique')
-                                ->with('vehicle')
-                                ->get();
-        // $insurances = Priority::where('company_id', Auth::user()->company_id)
-        //                         ->where('type_priority','Visite technique')
-                                    // ->white('vehicle')
+                                    ->white('vehicle')
 
-        //                         ->get();
+                                ->get();
         
         return $technical_inspections;
 
     }
     public function get_motor_vehicle_taxs_in_company(){
 
-        $technical_inspections = Priority::where('company_id', '1')
-                                ->where('type_priority','TVM')
-                                ->with('vehicle')
-                                ->get();
-        // $insurances = Priority::where('company_id', Auth::user()->company_id)
-        //                         ->where('type_priority','Visite technique')
-                                    // ->white('vehicle')
+  
+        $technical_inspections = Priority::where('company_id', Auth::user()->company_id)
+                                ->where('type_priority','Visite technique')
+                                    ->white('vehicle')
 
-        //                         ->get();
+                                ->get();
         
         return $technical_inspections;
 
@@ -388,25 +382,17 @@ class PriorityController extends Controller
 
     public function fetch_vehicles_without_insurance(){
 
-        $insurances = Priority::where('company_id', '1')
+       
+
+        $insurances = Priority::where('company_id',  Auth::user()->company_id)
                                 ->where('type_priority','Assurance')
                                 ->with('vehicle')
                                 ->get()
                                 ->pluck('vehicle_id')
                                 ->toArray();
 
-        $vehicles = \App\Models\Vehicle::where('company_id', '1')
+        $vehicles = \App\Models\Vehicle::where('company_id',  Auth::user()->company_id)
                                 ->whereNotIn('id', $insurances)
-
-        // $insurances = Priority::where('company_id',  Auth::user()->company_id)
-        //                         ->where('type_priority','Assurance')
-        //                         ->with('vehicle')
-        //                         ->get()
-        //                         ->pluck('vehicle_id')
-        //                         ->toArray();
-
-        // $vehicles = \App\Models\Vehicle::where('company_id',  Auth::user()->company_id)
-        //                         ->whereNotIn('id', $insurances)
                                 ->get();
         
         return $vehicles;
@@ -415,7 +401,7 @@ class PriorityController extends Controller
 
     public function fetch_vehicles_without_technicalinspection(){
 
-        $technicalinspections = Priority::where('company_id', '1')
+        $technicalinspections = Priority::where('company_id', Auth::user()->company_id)
                                 ->where('type_priority','Visite technique')
                                 ->with('vehicle')
                                 ->get()
@@ -425,15 +411,7 @@ class PriorityController extends Controller
         $vehicles = \App\Models\Vehicle::where('company_id', '1')
                                 ->whereNotIn('id', $technicalinspections)
 
-        // $insurances = Priority::where('company_id',  Auth::user()->company_id)
-        //                         ->where('type_priority','Visite technique')
-        //                         ->with('vehicle')
-        //                         ->get()
-        //                         ->pluck('vehicle_id')
-        //                         ->toArray();
-
-        // $vehicles = \App\Models\Vehicle::where('company_id',  Auth::user()->company_id)
-        //                         ->whereNotIn('id', $insurances)
+      
                                 ->get();
         
         return $vehicles;
@@ -441,7 +419,7 @@ class PriorityController extends Controller
     }
     public function fetch_vehicles_without_MotorVehicleTax(){
 
-        $MotorVehicleTaxs = Priority::where('company_id', '1')
+        $MotorVehicleTaxs = Priority::where('company_id', Auth::user()->company_id)
                                 ->where('type_priority','TVM')
                                 ->with('vehicle')
                                 ->get()
@@ -451,15 +429,7 @@ class PriorityController extends Controller
         $vehicles = \App\Models\Vehicle::where('company_id', '1')
                                 ->whereNotIn('id', $MotorVehicleTaxs)
 
-        // $MotorVehicleTaxs = Priority::where('company_id',  Auth::user()->company_id)
-        //                         ->where('type_priority','TVM')
-        //                         ->with('vehicle')
-        //                         ->get()
-        //                         ->pluck('vehicle_id')
-        //                         ->toArray();
-
-        // $vehicles = \App\Models\Vehicle::where('company_id',  Auth::user()->company_id)
-        //                         ->whereNotIn('id', $MotorVehicleTaxs)
+      
                                 ->get();
         
         return $vehicles;

@@ -43,8 +43,8 @@ class VehicleController extends Controller
         
         $Vehicle = new Vehicle();
 
-        $Vehicle->company_id = '1';
-        //$Vehicle->company_id = Auth::user()->company_id;
+        $Vehicle->company_id = Auth::user()->company_id;
+       
         $Vehicle->registration_number_vehicle =  $request->registration_number_vehicle;
         $Vehicle->brand_vehicle = $request->brand_vehicle;
         $Vehicle->driver_id = $request->driver_id;
@@ -99,8 +99,8 @@ class VehicleController extends Controller
         
         $Vehicle = Vehicle::find($id);
 
-        $Vehicle->company_id = '1';
-        //$Vehicle->company_id = Auth::user()->company_id;
+        $Vehicle->company_id = Auth::user()->company_id;
+       
         $Vehicle->registration_number_vehicle =  $request->registration_number_vehicle;
         $Vehicle->brand_vehicle = $request->brand_vehicle;
         $Vehicle->driver_id = $request->driver_id;
@@ -128,8 +128,8 @@ class VehicleController extends Controller
 
     public function get_vehicles_in_company(){
 
-         //$drivers = Driver::where('company_id', Auth::user()->company_id)->latest()->get();
-         $vehicles = Vehicle::where('company_id', '1')->with('driver')->latest()->get();
+       
+         $vehicles = Vehicle::where('company_id', Auth::user()->company_id)->with('driver')->latest()->get();
 
          return $vehicles;
     }

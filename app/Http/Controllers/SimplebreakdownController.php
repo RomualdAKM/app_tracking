@@ -45,8 +45,8 @@ class SimplebreakdownController extends Controller
     
     $Simplebreakdown = new Simplebreakdown();
 
-    $Simplebreakdown->company_id = '1';
-   // $Simplebreakdown->company_id = Auth::user()->company_id;
+    $Simplebreakdown->company_id = Auth::user()->company_id;
+ 
     $Simplebreakdown->name_simplebreakdown =  $request->name_simplebreakdown;
     $Simplebreakdown->repair_amount_simplebreakdown = $request->repair_amount_simplebreakdown;
     $Simplebreakdown->garage_name_simplebreakdown =  $request->garage_name_simplebreakdown;
@@ -105,8 +105,8 @@ class SimplebreakdownController extends Controller
     
     $Simplebreakdown = Simplebreakdown::find($id);
 
-    $Simplebreakdown->company_id = '1';
-   // $Simplebreakdown->company_id = Auth::user()->company_id;
+    $Simplebreakdown->company_id = Auth::user()->company_id;
+  
     $Simplebreakdown->name_simplebreakdown =  $request->name_simplebreakdown;
     $Simplebreakdown->repair_amount_simplebreakdown = $request->repair_amount_simplebreakdown;
     $Simplebreakdown->garage_name_simplebreakdown =  $request->garage_name_simplebreakdown;
@@ -132,8 +132,8 @@ class SimplebreakdownController extends Controller
 
    public function get_simplebreakdowns_in_company(){
 
-    //$Simplebreakdowns = Simplebreakdown::where('company_id', Auth::user()->company_id)->with(['vehicle','typebreakdown'])->get();
-    $Simplebreakdowns = Simplebreakdown::where('company_id', '1')->with(['vehicle','typebreakdown'])->get();
+    
+    $Simplebreakdowns = Simplebreakdown::where('company_id', Auth::user()->company_id)->with(['vehicle','typebreakdown'])->get();
 
     return $Simplebreakdowns;
 

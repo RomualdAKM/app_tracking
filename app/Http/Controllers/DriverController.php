@@ -42,7 +42,8 @@ class DriverController extends Controller
         
         $Driver = new Driver();
 
-        $Driver->company_id = '1';
+        // $Driver->company_id = '1';
+        $Driver->company_id = Auth::user()->company_id;
         $Driver->name_driver =  $request->name_driver;
         $Driver->first_name_driver = $request->first_name_driver;
         $Driver->address_driver =  $request->address_driver;
@@ -96,7 +97,8 @@ class DriverController extends Controller
         
         $Driver =  Driver::find($id);
 
-        $Driver->company_id = '1';
+        //$Driver->company_id = '1';
+        $Driver->company_id = Auth::user()->company_id;
         $Driver->name_driver =  $request->name_driver;
         $Driver->first_name_driver = $request->first_name_driver;
         $Driver->address_driver =  $request->address_driver;
@@ -123,9 +125,8 @@ class DriverController extends Controller
     public function get_drivers_in_company(){
 
       
-        //$drivers = Driver::where('company_id', Auth::user()->company_id)->latest()->get();
-        $drivers = Driver::where('company_id', '1')->latest()->get();
-
+        $drivers = Driver::where('company_id', Auth::user()->company_id)->latest()->get();
+      
         return $drivers;
     }
 

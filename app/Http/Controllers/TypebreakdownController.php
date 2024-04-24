@@ -29,8 +29,8 @@ class TypebreakdownController extends Controller
 
     $Typebreakdown = new Typebreakdown();
 
-    $Typebreakdown->company_id = '1';
-    // $Typebreakdown->company_id = Auth::user()->company_id;
+    $Typebreakdown->company_id = Auth::user()->company_id;
+  
     $Typebreakdown->name_type_breakdown =  $request->name_type_breakdown;
     $Typebreakdown->description_type_breakdown =  $request->description_type_breakdown;
     $Typebreakdown->save();
@@ -66,8 +66,8 @@ class TypebreakdownController extends Controller
 
     $Typebreakdown = Typebreakdown::find($id);
 
-    $Typebreakdown->company_id = '1';
-    // $Typebreakdown->company_id = Auth::user()->company_id;
+    $Typebreakdown->company_id = Auth::user()->company_id;
+   
     $Typebreakdown->name_type_breakdown =  $request->name_type_breakdown;
     $Typebreakdown->description_type_breakdown =  $request->description_type_breakdown;
     $Typebreakdown->save();
@@ -87,8 +87,7 @@ class TypebreakdownController extends Controller
 
    public function get_typebreakdowns_in_company(){
 
-    $typebreakdown = Typebreakdown::latest('created_at')->where('company_id', '1')->get();
-   //$typebreakdown = Typebreakdown::latest('created_at')->where('company_id', Auth::user()->company_id)->get();
+    $typebreakdown = Typebreakdown::latest('created_at')->where('company_id', Auth::user()->company_id)->get();
 
     return  $typebreakdown;
 

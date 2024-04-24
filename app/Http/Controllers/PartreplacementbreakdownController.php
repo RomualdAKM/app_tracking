@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Partreplacementbreakdown;
 use Illuminate\Support\Facades\Validator;
 
@@ -65,8 +66,8 @@ class PartreplacementbreakdownController extends Controller
         
         $partreplacementbreakdown = new Partreplacementbreakdown();
     
-        $partreplacementbreakdown->company_id = '1';
-       // $partreplacementbreakdown->company_id = Auth::user()->company_id;
+       
+        $partreplacementbreakdown->company_id = Auth::user()->company_id;
         $partreplacementbreakdown->name_partreplacementbreakdown =  $request->name_partreplacementbreakdown;
         $partreplacementbreakdown->repair_amount_partreplacementbreakdown = $request->repair_amount_partreplacementbreakdown;
         $partreplacementbreakdown->garage_name_partreplacementbreakdown =  $request->garage_name_partreplacementbreakdown;
@@ -148,8 +149,8 @@ class PartreplacementbreakdownController extends Controller
         
         $partreplacementbreakdown =  Partreplacementbreakdown::find($id);
     
-        $partreplacementbreakdown->company_id = '1';
-       // $partreplacementbreakdown->company_id = Auth::user()->company_id;
+      
+        $partreplacementbreakdown->company_id = Auth::user()->company_id;
         $partreplacementbreakdown->name_partreplacementbreakdown =  $request->name_partreplacementbreakdown;
         $partreplacementbreakdown->repair_amount_partreplacementbreakdown = $request->repair_amount_partreplacementbreakdown;
         $partreplacementbreakdown->garage_name_partreplacementbreakdown =  $request->garage_name_partreplacementbreakdown;
@@ -186,8 +187,8 @@ class PartreplacementbreakdownController extends Controller
 
     public function get_partreplacementbreakdowns_in_company(){
 
-    //$partreplacementbreakdowns = Partreplacementbreakdown::where('company_id', Auth::user()->company_id)->with(['vehicle','typebreakdown'])->get();
-    $partreplacementbreakdowns = Partreplacementbreakdown::where('company_id', '1')->with(['vehicle','typebreakdown'])->get();
+    $partreplacementbreakdowns = Partreplacementbreakdown::where('company_id', Auth::user()->company_id)->with(['vehicle','typebreakdown'])->get();
+    //$partreplacementbreakdowns = Partreplacementbreakdown::where('company_id', '1')->with(['vehicle','typebreakdown'])->get();
 
     return $partreplacementbreakdowns;
 
