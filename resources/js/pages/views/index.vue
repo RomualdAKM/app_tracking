@@ -1,7 +1,33 @@
 <script setup>
 import SideMenu from "./../components/SideMenu.vue"
 
+import { onMounted,ref,onBeforeMount } from 'vue'
 
+
+const loading = ref(true)
+
+
+onBeforeMount( () => {
+
+loading.value = true;
+
+if (!sessionStorage.getItem('page033Reloaded')) {
+    // Marquer que la page a été rechargée pour cette visite
+    sessionStorage.setItem('page033Reloaded', true);
+    
+    // Recharger la page une seule fois
+    window.location.reload();
+   
+} else {
+    // Réinitialiser le marquage pour la prochaine visite
+    sessionStorage.removeItem('page033Reloaded');
+    loading.value = false;
+   
+}
+
+console.log('loading', loading.value)
+
+})
 </script>
 
 <template>
@@ -10,7 +36,17 @@ import SideMenu from "./../components/SideMenu.vue"
          
             <SideMenu />
 
-            <h1>En développement ...</h1>
+            <div class="content transition-[margin,width] duration-100 xl:pl-3.5 pt-[54px] pb-16 relative z-10 group mode content--compact xl:ml-[275px] mode--light [&.content--compact]:xl:ml-[91px]">
+                
+                <div class="mt-16 px-5">
+                            <div class="container" >
+                                <h1 style="color:white;"> En cours ...</h1>
+                               
+
+
+                            </div>
+                </div>
+        </div>
         </div>
     </div>
 </template>

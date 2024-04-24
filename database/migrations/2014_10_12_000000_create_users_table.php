@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('number')->nullable();
             $table->string('role')->default('user');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
+          
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

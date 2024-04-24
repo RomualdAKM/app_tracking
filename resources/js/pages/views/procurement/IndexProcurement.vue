@@ -26,17 +26,17 @@ const formatDate = (dateString) => {
 
 const deleteProcurement =  (procurementId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, je supprime !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_procurement/" + procurementId).then(() => {
-                Swal.fire("Delete", "procurement delete successfully", "success");
+                Swal.fire("Suppression", "Marché supprimé avec succès", "success");
                 getProcurements()
             
             });
@@ -92,16 +92,16 @@ onMounted (async() => {
                                                             <tr data-tw-merge="" class="">
                                                               
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                                    Station d'approvisionnement
+                                                                    Station 
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                                    Date d'approvisionnement
+                                                                    Date 
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                                                     Quantité
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                                                    Coût d'approvisionnement
+                                                                    Coût
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                                                     Auteur

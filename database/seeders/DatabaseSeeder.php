@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'name_company' => 'Super',          
             'number_company' => '0000000000',               
             'email_company' => 'vibecrodevs@gmail.com',
-            'logo_company' => 'logo_tracking.png',
+            'logo_company' => 'logo-vibecro.jpg',
         
         ]);
 
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Super',         
             'number' => '0000000000',               
             'email' => 'vibecrodevs@gmail.com',
-            'role' => 'admin',
+            'role' => 'superadmin',
             'company_id' => '1',
             'password' => Hash::make('motdepasse'),
         

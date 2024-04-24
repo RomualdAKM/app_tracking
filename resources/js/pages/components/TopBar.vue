@@ -1,3 +1,29 @@
+<script setup>
+import {ref,onMounted} from 'vue'
+import router from "./../../router/index.js"
+
+
+const user = ref({})
+
+const getAuthUser = async () => {
+    const response = await axios.get('/api/get_info_auth_user')
+    user.value = response.data
+    console.log('user',response.data)
+}
+
+const logout =  () => {
+    sessionStorage.removeItem("token");
+    // window.location.reload();
+    router.push("/");
+};
+
+onMounted (async() => {
+  await  getAuthUser()
+})
+
+</script>
+
+
 <template>
        <div class="fixed inset-x-0 top-0 mt-3.5 h-[65px] transition-[margin] duration-100 xl:ml-[275px] group-[.side-menu--collapsed]:xl:ml-[90px]">
                     <div class="top-bar absolute left-0 xl:left-3.5 right-0 h-full mx-5 group before:content-[''] before:absolute before:top-0 before:inset-x-0 before:-mt-[15px] before:h-[20px] before:backdrop-blur">
@@ -14,11 +40,11 @@
                             <nav aria-label="breadcrumb" class="flex hidden flex-1 xl:block">
                                 <ol class="flex items-center text-theme-1 dark:text-slate-300 text-white/90">
                                     <li class="">
-                                        <a href="#">App</a>
+                                        <a href="/">Page d'accueil</a>
                                     </li>
-                                    <li class="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white">
+                                    <!-- <li class="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white">
                                         <a href="#">Dashboards</a>
-                                    </li>
+                                    </li> -->
                                     <!-- <li class="relative ml-5 pl-0.5 before:content-[''] before:w-[14px] before:h-[14px] before:bg-chevron-white before:transform before:rotate-[-90deg] before:bg-[length:100%] before:-ml-[1.125rem] before:absolute before:my-auto before:inset-y-0 dark:before:bg-chevron-white text-white/70">
                                         <a href="#">Analytics</a>
                                     </li> -->
@@ -63,7 +89,10 @@
                                         <i data-tw-merge="" data-lucide="bell" class="stroke-[1] h-[18px] w-[18px]"></i>
                                     </a>
                                 </div>
-                                <div data-tw-merge="" data-tw-placement="bottom-end" class="dropdown relative ml-5"><button data-tw-toggle="dropdown" aria-expanded="false" class="cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-white/[0.15]"><img src="/logo_tracking.png" alt="Tailwise - Admin Dashboard Template">
+                                <div data-tw-merge="" data-tw-placement="bottom-end"
+                                 class="dropdown relative ml-5"><button data-tw-toggle="dropdown"
+                                  aria-expanded="false" class="cursor-pointer image-fit h-[36px] w-[36px] overflow-hidden rounded-full border-[3px] border-white/[0.15]">
+                                  <img v-if="user.company" :src="'/logo_company/'+ user.company.logo_company" alt="">
                                     </button>
                                     <div data-transition="" data-selector=".show" data-enter="transition-all ease-linear duration-150" data-enter-from="absolute !mt-5 invisible opacity-0 translate-y-1" data-enter-to="!mt-1 visible opacity-100 translate-y-0" data-leave="transition-all ease-linear duration-150" data-leave-from="!mt-1 visible opacity-100 translate-y-0" data-leave-to="absolute !mt-5 invisible opacity-0 translate-y-1" class="dropdown-menu absolute z-[9999] hidden">
                                         <div data-tw-merge="" class="dropdown-content rounded-md border-transparent bg-white p-2 shadow-[0px_3px_10px_#00000017] dark:border-transparent dark:bg-darkmode-600 mt-1 w-56">
@@ -81,14 +110,14 @@
                                             </div>
                                             <a href="echo-settings.html" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="users" class="stroke-[1] mr-2 h-4 w-4"></i>
                                                 Profile Info</a> -->
-                                            <a href="#" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="power" class="stroke-[1] mr-2 h-4 w-4"></i>
-                                                Logout</a>
+                                            <a href="#" @click="logout()" class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item"><i data-tw-merge="" data-lucide="power" class="stroke-[1] mr-2 h-4 w-4"></i>
+                                                Deconnexion
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                          
-                           
                             <!-- END: Notification & User Menu -->
                         </div>
                     </div>

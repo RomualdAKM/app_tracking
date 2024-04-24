@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\ProcurementController;
@@ -24,6 +26,23 @@ use App\Http\Controllers\PartreplacementbreakdownController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('register','register');
+    Route::post('login','login');
+    Route::get('get_info_auth_user','get_info_auth_user');
+   
+});
+
+Route::controller(CompanyController::class)->group(function(){
+
+    Route::post('save_company','save_company');
+    Route::post('update_company/{id}','update_company');
+    Route::get('get_companies','get_companies');
+    Route::get('delete_company/{id}','delete_company');
+    Route::get('get_company/{id}','get_company');
+
 });
 
 Route::controller(DriverController::class)->group(function(){

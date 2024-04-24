@@ -25,17 +25,17 @@ const formatDate = (dateString) => {
 };
 const deleteTechnicalinspection =  (technicalinspectionId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, je supprime !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_technical_inspection/" + technicalinspectionId).then(() => {
-                Swal.fire("Delete", "visite technique delete successfully", "success");
+                Swal.fire("Suppression effectuée", "visite technique supprimée avec succès", "success");
                 getTechnicalinspections()
                 window.location.reload();
 

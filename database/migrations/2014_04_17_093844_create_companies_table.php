@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name_company')->nullable();
             $table->string('number_company')->nullable();
-            $table->string('email_company')->nullable();
+            $table->string('email_company')->unique();
             $table->string('logo_company')->nullable();
             $table->timestamps();
         });

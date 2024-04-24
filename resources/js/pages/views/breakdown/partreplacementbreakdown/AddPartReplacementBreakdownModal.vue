@@ -33,20 +33,20 @@ const changePhoto2 = (e) => {
     const file = e.target.files[0];
 
     // Affichage du nom du fichier dans la console
-    console.log('old_photo_part_partreplacementbreakdowns', file);
+    console.log('old_photo_part_partreplacementbreakdown', file);
 
     // Mise à jour du state "form" en ajoutant la nouvelle photo
-    form.old_photo_part_partreplacementbreakdowns = file;
+    form.old_photo_part_partreplacementbreakdown = file;
 }
 const changePhoto3 = (e) => {
     // Récupération du premier fichier sélectionné
     const file = e.target.files[0];
 
     // Affichage du nom du fichier dans la console
-    console.log('new_photo_part_partreplacementbreakdowns', file);
+    console.log('new_photo_part_partreplacementbreakdown', file);
 
     // Mise à jour du state "form" en ajoutant la nouvelle photo
-    form.new_photo_part_partreplacementbreakdowns = file;
+    form.new_photo_part_partreplacementbreakdown = file;
 }
 
 const getVehicles = async () => {
@@ -77,7 +77,7 @@ const savepartreplacementbreakdown = async () => {
     if (form.photo_faulty_device_trouble) {
         formData.append("photo_faulty_device_trouble", form.photo_faulty_device_trouble);
     }
-    if (form.photo_faunew_photo_part_partreplacementbreakdownlty_device_trouble) {
+    if (form.new_photo_part_partreplacementbreakdown) {
         formData.append("new_photo_part_partreplacementbreakdown", form.photo_faulty_device_trouble);
     }
     if (form.old_photo_part_partreplacementbreakdown) {

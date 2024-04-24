@@ -79,7 +79,7 @@ const updateDriver = async () => {
         <div data-tw-merge class="w-[90%] mx-auto bg-white relative rounded-md shadow-md transition-[margin-top,transform] duration-[0.4s,0.3s] -mt-16 group-[.show]:mt-16 group-[.modal-static]:scale-[1.05] dark:bg-darkmode-600 sm:w-[460px]">
             <div class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400">
                 <h2 class="mr-auto text-base font-medium">
-                    Ajouter un chauffeur 
+                    Editer
                 </h2>
             
             </div>

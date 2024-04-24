@@ -26,17 +26,17 @@ const formatDate = (dateString) => {
 
 const deleteTrip =  (tripId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, supprimer !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_trip/" + tripId).then(() => {
-                Swal.fire("Delete", "trip delete successfully", "success");
+                Swal.fire("Suppression", "Le voyage a été supprimé avec succès", "success");
                 getTrips()
             
             });
@@ -92,16 +92,16 @@ onMounted (async() => {
                                                             <tr data-tw-merge="" class="">
                                                               
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                                    Lieu de départ
+                                                                    Lieu de <br> départ
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                                                    Date et Heure de départ
+                                                                    Date et <br> Heure de départ
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                                                     Destination
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                                                    Date et Heure d'arrivée
+                                                                    Date et <br> Heure d'arrivée
                                                                 </td>
                                                                 <td data-tw-merge="" class="px-5 border-b dark:border-darkmode-300 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                                                     Observation

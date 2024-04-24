@@ -43,8 +43,8 @@
 
                     <!-- Header User Event -->
                     <div class="flex items-center gap-6">
-                        <a class='btn-text hidden hover:text-ColorPurple sm:inline-block' href='login.html'>Login</a>
-                        <a class='btn is-lunar-green is-rounded btn-animation group hidden sm:inline-block' href='signup.html'><span>Sign up free</span></a>
+                        <a class='btn-text hidden hover:text-ColorPurple sm:inline-block' href='/dashboad/Login'>Connexion</a>
+                        <a class='btn is-lunar-green is-rounded btn-animation group hidden sm:inline-block' href='/dashboad/Register'><span>Inscription</span></a>
                         <!-- Responsive Offcanvas Menu Button -->
                         <div class="block lg:hidden">
                             <button id="openBtn" class="hamburger-menu mobile-menu-trigger">

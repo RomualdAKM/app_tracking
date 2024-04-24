@@ -25,17 +25,17 @@ const formatDate = (dateString) => {
 
 const deletetypebreakdown =  (typebreakdownId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, supprimer !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_typebreakdown/" + typebreakdownId).then(() => {
-                Swal.fire("Delete", "typebreakdown delete successfully", "success");
+                Swal.fire("Suppression", "Type de panne supprimé avec succès", "success");
                 getTypebreakdowns()
             
             });

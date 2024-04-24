@@ -27,17 +27,17 @@ const formatDate = (dateString) => {
 
 const deleteVehicle =  (vehicleId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, supprimer !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_vehicle/" + vehicleId).then(() => {
-                Swal.fire("Delete", "vehicle delete successfully", "success");
+                Swal.fire("Suppression", "Véhicule supprimé avec succès", "success");
                 getVehicles()
             
             });

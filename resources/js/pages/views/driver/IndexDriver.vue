@@ -27,18 +27,18 @@ const getDriver = async (id) => {
 
 
 const deleteDriver =  (driverId) => {
-  Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+    Swal.fire({
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, je supprime",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_driver/" + driverId).then(() => {
-                Swal.fire("Delete", "drivere delete successfully", "success");
+                Swal.fire("Suppression", "Le chauffeur a bien été supprimé", "success");
                 getDrivers()
             
             });

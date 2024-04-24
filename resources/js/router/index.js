@@ -1,7 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import index from '../pages/index.vue'
+//auth
+import Register from '../pages/views/auth/register.vue'
+import Login from '../pages/views/auth/login.vue'
+// import Login from '../pages/views/auth/login.vue'
 
 import statistic from '../pages/views/index.vue'
+
+//companies
+import IndexCompanies from '../pages/views/admin/companies/IndexCompanies.vue'
 
 //driver
 import IndexDriver from '../pages/views/driver/IndexDriver.vue'
@@ -40,10 +47,26 @@ const routes = [
         component: index,
         
     },
+    //auth
+    {   
+        name: 'Register',
+        path: '/dashboad/Register',
+        component: Register,
+        
+    },
+    {   
+        name: 'Login',
+        path: '/dashboad/Login',
+        component: Login,
+        
+    },
     {   
         name: 'statistic',
         path: '/dashboad/statistic',
         component: statistic,
+          meta: {
+            requiresAuth: true
+        }
         
     },
     //driver
@@ -51,6 +74,9 @@ const routes = [
         name: 'IndexDriver',
         path: '/dashboad/IndexDriver',
         component: IndexDriver,
+          meta: {
+            requiresAuth: true
+        }
         
     },
     
@@ -59,6 +85,9 @@ const routes = [
         name: 'IndexProcurement',
         path: '/dashboad/IndexProcurement',
         component: IndexProcurement,
+          meta: {
+            requiresAuth: true
+        }
         
     },
     //IndexTrip
@@ -66,6 +95,11 @@ const routes = [
         name: 'IndexTrip',
         path: '/dashboad/IndexTrip',
         component: IndexTrip,
+          meta: {
+            requiresAuth: true
+        }
+        
+        
         
     },
 
@@ -76,6 +110,11 @@ const routes = [
         name: 'IndexInsurance',
         path: '/dashboad/IndexInsurance',
         component: IndexInsurance,
+          meta: {
+            requiresAuth: true
+        }
+        
+        
         
     },
     //IndexTechnicalInspection
@@ -83,6 +122,11 @@ const routes = [
         name: 'IndexTechnicalInspection',
         path: '/dashboad/IndexTechnicalInspection',
         component: IndexTechnicalInspection,
+          meta: {
+            requiresAuth: true
+        }
+        
+        
         
     },
     //IndexMotorVehicleTax
@@ -90,6 +134,9 @@ const routes = [
         name: 'IndexMotorVehicleTax',
         path: '/dashboad/IndexMotorVehicleTax',
         component: IndexMotorVehicleTax,
+         meta: {
+            requiresAuth: true
+        }
         
     },
 
@@ -98,6 +145,9 @@ const routes = [
         name: 'IndexVehicle',
         path: '/dashboad/IndexVehicle',
         component: IndexVehicle,
+         meta: {
+            requiresAuth: true
+        }
         
     },
     //panne
@@ -105,18 +155,36 @@ const routes = [
         name: 'IndexTypeBreakdown',
         path: '/dashboad/IndexTypeBreakdown',
         component: IndexTypeBreakdown,
+         meta: {
+            requiresAuth: true
+        }
         
     },
     {   
         name: 'IndexSimpleBreakdown',
         path: '/dashboad/IndexSimpleBreakdown',
         component: IndexSimpleBreakdown,
+         meta: {
+            requiresAuth: true
+        }
         
     },
     {   
         name: 'IndexPartReplacementBreakdown',
         path: '/dashboad/IndexPartReplacementBreakdown',
         component: IndexPartReplacementBreakdown,
+        meta: {
+            requiresAuth: true
+        }
+        
+    },
+    {   
+        name: 'IndexCompanies',
+        path: '/dashboad/IndexCompanies',
+        component: IndexCompanies,
+        meta: {
+            requiresAuth: true
+        }
         
     },
 
@@ -132,6 +200,16 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 
+})
+
+router.beforeEach((to,from) =>{
+    if(to.meta.requiresAuth && !localStorage.getItem('token')){
+        return { name: 'Login' }
+    }
+
+    // if(to.meta.requiresAuth == false && localStorage.getItem('token')){
+    //     return { name: 'index' }
+    // }
 })
 
 export default router

@@ -27,17 +27,17 @@ const formatDate = (dateString) => {
 
 const deleteSimplebreakdown =  (simplebreakdownId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, supprimer !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_simplebreakdown/" + simplebreakdownId).then(() => {
-                Swal.fire("Delete", "simple panne delete successfully", "success");
+                Swal.fire("Suppression", "Panne simple supprimée avec succès", "success");
                 getSimplebreakdowns()
                 window.location.reload();
             

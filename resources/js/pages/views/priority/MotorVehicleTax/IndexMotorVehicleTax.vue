@@ -25,21 +25,20 @@ const formatDate = (dateString) => {
 };
 const deleteMotorVehicleTax =  (MotorVehicleTaxId) => {
   Swal.fire({
-        title: "Are you sure ?",
-        text: "You can't go back",
+        title: "Êtes-vous sûr(e) ?",
+        text: "Vous ne pourrez pas revenir en arrière",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it !",
+        confirmButtonText: "Oui, supprimer !",
     }).then((result) => {
         if (result.value) {
             axios.get("/api/delete_motor_vehicle_tax/" + MotorVehicleTaxId).then(() => {
-                Swal.fire("Delete", "MVT delete successfully", "success");
+                Swal.fire("Suppression", "TVM supprimée avec succès", "success");
                 getMotorVehicleTaxs()
                window.location.reload();
 
-            
             });
         }
     });

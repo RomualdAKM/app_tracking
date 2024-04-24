@@ -1,5 +1,30 @@
-<template>
-                 
+<script setup>
+import {ref,onMounted} from 'vue'
+import router from "./../../router/index.js"
+
+
+const user = ref({})
+
+const getAuthUser = async () => {
+    const response = await axios.get('/api/get_info_auth_user')
+    user.value = response.data
+    console.log('user',response.data)
+}
+
+const logout =  () => {
+    sessionStorage.removeItem("token");
+    // window.location.reload();
+    router.push("/");
+};
+
+onMounted (async() => {
+  await  getAuthUser()
+})
+
+</script>
+
+
+<template>         
                  <div class="side-menu__content h-full box bg-white/[0.95] rounded-none xl:rounded-xl z-20 relative w-[275px] duration-300 transition-[width] group-[.side-menu--collapsed]:xl:w-[91px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:shadow-[6px_0_12px_-4px_#0000000f] group-[.side-menu--collapsed.side-menu--on-hover]:xl:w-[275px] overflow-hidden flex flex-col">
                     <div class="flex-none hidden xl:flex items-center z-10 px-5 h-[65px] w-[275px] overflow-hidden relative duration-300 group-[.side-menu--collapsed]:xl:w-[91px] group-[.side-menu--collapsed.side-menu--on-hover]:xl:w-[275px]">
                         <a class="flex items-center transition-[margin] duration-300 group-[.side-menu--collapsed.side-menu--on-hover]:xl:ml-0 group-[.side-menu--collapsed]:xl:ml-2" href="#">
@@ -35,6 +60,19 @@
                                 <!-- END: Second Child -->
                             </li>
                            
+                            <li class="side-menu__divider" v-if="user.role == 'superadmin'">
+                                STRUCTURES
+                            </li>
+                            <li  v-if="user.role == 'superadmin'">
+                                <a href="/dashboad/IndexCompanies" class="side-menu__link ">
+                                    <i data-tw-merge="" data-lucide="gantt-chart-square" class="stroke-[1] w-5 h-5 side-menu__link__icon"></i>
+                                    <div class="side-menu__link__title">Liste des structures</div>
+                                    <!-- <div class="side-menu__link__badge">
+                                        4
+                                    </div> -->
+                                </a>
+                               
+                            </li>
                             <li class="side-menu__divider">
                                 CHAUFFEURS
                             </li>
