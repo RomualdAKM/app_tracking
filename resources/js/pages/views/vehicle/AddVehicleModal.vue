@@ -1,4 +1,3 @@
-use App\Models\Vehicle;
 <script setup>
 import { reactive,ref,onMounted } from 'vue'
 import IsLoading from '../../components/IsLoading.vue'

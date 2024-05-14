@@ -1,6 +1,6 @@
 <script setup>
-import AddSimplebreakdownModal from "./AddSimplebreakdownModal.vue"
-import EditSimplebreakdownModal from "./EditSimplebreakdownModal.vue"
+import AddSimplebreakdownModal from "./AddSimpleBreakdownModal.vue"
+import EditSimplebreakdownModal from "./EditSimpleBreakdownModal.vue"
 
 import SideMenu from "./../../../components/SideMenu.vue"
 

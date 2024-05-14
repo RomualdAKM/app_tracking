@@ -18,13 +18,16 @@ const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("fr-FR", options);
 };
 
+// Initialiser le datatable
+const initDataTable = () => {
+    $('#dataTable').DataTable();
+};
 
 const getDriver = async (id) => {
     const response = await axios.get('/api/get_driver/' + id)
     driver.value = response.data
     console.log('driver',response.data)
 }
-
 
 const deleteDriver =  (driverId) => {
     Swal.fire({
@@ -47,7 +50,15 @@ const deleteDriver =  (driverId) => {
 }
 
 onMounted (async() => {
-  await  getDrivers()
+
+    if(drivers.value && drivers.value.length > 0) {
+
+        initDataTable()
+
+    }
+
+    await  getDrivers()
+     
 })
 
 </script>
@@ -88,7 +99,7 @@ onMounted (async() => {
                                           
                                         </div>
                                         <div class="overflow-auto xl:overflow-visible">
-                                            <table data-tw-merge="" class="w-full text-left border-b border-slate-200/60">
+                                            <table v-if="drivers && drivers.length > 0" data-tw-merge="" id="dataTable"  class="w-full text-left border-b border-slate-200/60">
                                                 <thead data-tw-merge="" class="">
                                                     <tr data-tw-merge="" class="">
                                                       

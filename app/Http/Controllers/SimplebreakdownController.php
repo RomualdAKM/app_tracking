@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Simplebreakdown;
 use Illuminate\Support\Facades\Auth;
@@ -155,4 +156,55 @@ class SimplebreakdownController extends Controller
 
 
    }
+
+   public function get_count_simple_breakdown_by_month($vehicleId){
+
+
+    // Obtenir la date actuelle
+    $now = Carbon::now();
+    
+    // Obtenir l'année actuelle
+    $year = $now->year;
+    
+    // Créer un tableau pour stocker les mois
+    $months = [];
+    
+    // Boucler sur les 12 mois de l'année
+    for ($i = 1; $i <= 12; $i++) {
+        // Créer une instance de Carbon avec l'année et le mois, puis formater la date
+        $months[$i] = Carbon::createFromDate($year, $i)->format('M');
+    }
+    
+    // Tableau pour stocker le nombre de défaillances par mois
+    $Simplebreakdowns = [];
+    
+    // Parcourir les mois
+    foreach ($months as $key => $month) {
+        if ($vehicleId == 0) {
+           
+            // Compter le nombre de défaillances pour l'année et le mois en cours
+            $count = Simplebreakdown::where('company_id', Auth::user()->company_id)
+                ->whereYear('created_at', $year)
+                ->whereMonth('created_at', $key)
+                ->count();
+        }else{
+            // Compter le nombre de défaillances pour l'année et le mois en cours
+            $count = Simplebreakdown::where('company_id', Auth::user()->company_id)
+            ->where('vehicle_id', $vehicleId)
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $key)
+            ->count();
+
+        }
+        
+        // Ajouter la valeur au tableau sans clé
+        $Simplebreakdowns[] = $count;
+    }
+   // dd($Simplebreakdowns);
+    //return $Simplebreakdowns;
+
+    return response()->json([
+        'Simplebreakdowns' => $Simplebreakdowns
+    ]);
+}
 }

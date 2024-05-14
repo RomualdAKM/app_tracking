@@ -1,3 +1,10 @@
+ <script setup>
+import { onMounted, ref, onBeforeMount } from 'vue'
+
+
+</script>
+
+
 <template>
      <!--...::: Header Start :::... -->
      <header class="site-header site-header--sticky mobile-sticky-enable is--white py-3" id="sticky-menu">
@@ -35,6 +42,9 @@
                                 </li>
                                 <li class="nav-item nav-item-has-children">
                                     <a href="#whychooseus" class="nav-link-item drop-trigger">Pourquoi nous choisir?</a>
+                                </li>
+                                <li class="nav-item nav-item-has-children">
+                                    <router-link to="/test" class="nav-link-item drop-trigger">Test</router-link>
                                 </li>
                             </ul>
                         </nav>

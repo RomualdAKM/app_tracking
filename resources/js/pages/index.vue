@@ -17,12 +17,12 @@ onBeforeMount(() => {
 
   const pageReloaded = sessionStorage.getItem('page033Reloaded');
   if (!pageReloaded) {
-    // Marquer que la page a été rechargée pour cette visite
+   
     sessionStorage.setItem('page033Reloaded', 'true');
-    // Recharger la page une seule fois
+  
     window.location.reload();
   } else {
-    // Réinitialiser le marquage pour la prochaine visite
+   
     sessionStorage.removeItem('page033Reloaded');
     loading.value = false;
   }
@@ -36,7 +36,8 @@ onBeforeMount(() => {
       <span class="font-bold text-lg">Loading...</span>
     </div>
   </div>
-  <div v-else class="page-wrapper relative z-[1] bg-ColorAlmond">
+  <div class="page-wrapper relative z-[1] bg-ColorAlmond">
+  <!-- <div v-else class="page-wrapper relative z-[1] bg-ColorAlmond"> -->
     <Header />
 
     <main class="main-wrapper relative overflow-hidden">

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import index from '../pages/index.vue'
+import test from '../pages/test.vue'
 //auth
 import Register from '../pages/views/auth/register.vue'
 import Login from '../pages/views/auth/login.vue'
@@ -37,7 +38,6 @@ import IndexTypeBreakdown from '../pages/views/breakdown/typebreakdown/IndexType
 import IndexSimpleBreakdown from '../pages/views/breakdown/simplebreakdown/IndexSimpleBreakdown.vue'
 import IndexPartReplacementBreakdown from '../pages/views/breakdown/partreplacementbreakdown/IndexPartReplacementBreakdown.vue'
 
-
 import notFound from '../pages/notFound.vue'
 
 const routes = [
@@ -45,6 +45,12 @@ const routes = [
         name: 'index',
         path: '/',
         component: index,
+        
+    },
+    {   
+        name: 'test',
+        path: '/test',
+        component: test,
         
     },
     //auth

@@ -71,6 +71,8 @@ Route::controller(ProcurementController::class)->group(function(){
      Route::get('get_procurements_in_company','get_procurements_in_company');
      Route::get('delete_procurement/{id}','delete_procurement');
      Route::get('get_procurement/{id}','get_procurement');
+     Route::get('get_count_procurement_by_month/{vehicleId}','get_count_procurement_by_month');
+
   
 });
 
@@ -81,6 +83,7 @@ Route::controller(TripController::class)->group(function(){
       Route::get('get_trips_in_company','get_trips_in_company');
       Route::get('delete_trip/{id}','delete_trip');
     Route::get('get_trip/{id}','get_trip');
+    Route::get('get_count_trip_by_month/{vehicleId}','get_count_trip_by_month');
   
 });
 Route::controller(TypebreakdownController::class)->group(function(){
@@ -100,6 +103,7 @@ Route::controller(SimplebreakdownController::class)->group(function(){
       Route::get('get_simplebreakdowns_in_company','get_simplebreakdowns_in_company');
       Route::get('delete_simplebreakdown/{id}','delete_simplebreakdown');
       Route::get('get_simplebreakdown/{id}','get_simplebreakdown');
+      Route::get('get_count_simple_breakdown_by_month/{vehicleId}','get_count_simple_breakdown_by_month');
   
 });
 
@@ -110,8 +114,10 @@ Route::controller(PartreplacementbreakdownController::class)->group(function(){
        Route::get('get_partreplacementbreakdowns_in_company','get_partreplacementbreakdowns_in_company');
        Route::get('delete_partreplacementbreakdown/{id}','delete_partreplacementbreakdown');
        Route::get('get_partreplacementbreakdown/{id}','get_partreplacementbreakdown');
+       Route::get('get_count_partre_placement_breakdown_by_month/{vehicleId}','get_count_partre_placement_breakdown_by_month');
   
 });
+
 
 Route::controller(PriorityController::class)->group(function(){
 

@@ -7,6 +7,8 @@ import router from './router/index'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/dist/sweetalert2.css'
 
+
+
 window.Swal = Swal
 const toast = Swal.mixin({
     toast: true,
@@ -17,6 +19,7 @@ const toast = Swal.mixin({
 })
 
 window.toast = toast
+
 
 // const pinia = createPinia()
 // createApp(app).use(pinia).use(router).mount('#app')

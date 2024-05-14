@@ -20,6 +20,8 @@
         <!-- END: CSS Assets-->
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.4/css/dataTables.tailwindcss.css">
+
 
         <style>
             
@@ -28,8 +30,14 @@
     </head>
     <body>
         <div id="app">
-
         </div>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.0.4/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/2.0.4/js/dataTables.tailwindcss.js"></script>
         <script src="{{ mix('js/app.js') }}"></script>
         <script src="{{ asset('dist/js/vendors/dom.js')}}"></script>
         <script src="{{ asset('dist/js/vendors/tailwind-merge.js')}}"></script>
