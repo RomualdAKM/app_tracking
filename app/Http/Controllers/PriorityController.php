@@ -348,7 +348,7 @@ class PriorityController extends Controller
                                 ->get();
         // $insurances = Priority::where('company_id', Auth::user()->company_id)
         //                         ->where('type_priority','Assurance')
-                                    // ->white('vehicle')
+                                    // ->with('vehicle')
 
         //                         ->get();
         
@@ -360,7 +360,7 @@ class PriorityController extends Controller
        
         $technical_inspections = Priority::where('company_id', Auth::user()->company_id)
                                 ->where('type_priority','Visite technique')
-                                    ->white('vehicle')
+                                    ->with('vehicle')
 
                                 ->get();
         
@@ -372,7 +372,7 @@ class PriorityController extends Controller
   
         $technical_inspections = Priority::where('company_id', Auth::user()->company_id)
                                 ->where('type_priority','Visite technique')
-                                    ->white('vehicle')
+                                    ->with('vehicle')
 
                                 ->get();
         
