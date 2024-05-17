@@ -23,6 +23,9 @@ import IndexProcurement from '../pages/views/procurement/IndexProcurement.vue'
 //trip
 import IndexTrip from '../pages/views/trip/IndexTrip.vue'
 
+//setting
+import IndexSetting from '../pages/views/setting/EditPassword.vue'
+
 //priority
 //insurance
 import IndexInsurance from '../pages/views/priority/insurance/IndexInsurance.vue'
@@ -80,6 +83,16 @@ const routes = [
         name: 'IndexDriver',
         path: '/dashboad/IndexDriver',
         component: IndexDriver,
+          meta: {
+            requiresAuth: true
+        }
+        
+    },
+    //setting
+    {   
+        name: 'IndexSetting',
+        path: '/dashboad/IndexSetting',
+        component: IndexSetting,
           meta: {
             requiresAuth: true
         }

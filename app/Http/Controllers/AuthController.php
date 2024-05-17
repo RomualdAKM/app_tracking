@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Company;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Mail\ForgotPasswordMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -96,5 +99,84 @@ class AuthController extends Controller
 
             return $user;
 
+        }
+
+
+        public function forgot_password(Request $request){
+
+            $validator = Validator()->make($request->all(),[
+                'email' => 'required|email|exists:users,email'
+            ]);
+    
+            if ($validator->fails()) {
+                $response = [
+                    'success' => false,
+                    'message' => $validator->errors()
+                ];
+                return response()->json(
+                    $response
+                );
+            }
+    
+            $newPassword = Str::random(8);
+    
+            $user = User::where('email',$request->email)->first();
+
+            if($user){
+                
+                Mail::to($user->email)->send(new ForgotPasswordMail($newPassword));
+            }
+    
+            $input['password'] = bcrypt($newPassword);
+            $user->password = $input['password'];
+    
+            $user->save();
+    
+            $response = [
+                'success' => true,
+                'message' => 'Vous Avez recu un nouveau mot de passe, Veillez consulter votre Email'
+            ];
+            return response()->json(
+                $response,
+                200
+            );
+        }
+
+
+        public function reset_password(Request $request){
+
+            $validator = Validator::make($request->all(), [
+                'password' => 'required',
+                'c_password' => 'required|same:password'
+            ]);
+    
+            if ($validator->fails()) {
+                $response = [
+                    'success' => false,
+                    'message' => $validator->errors()
+                ];
+                return response()->json(
+                    $response,
+                    200
+                );
+            }
+    
+            $input = $request->all();
+            $input['password'] = bcrypt($input['password']);
+    
+            $user_id = Auth::user()->id;
+    
+            $user = User::find( $user_id);
+            $user->password = $input['password'];
+            $user->save();
+    
+            $response = [
+                'success' => true,
+                'message' => "reset password  successfully"
+            ];
+            return response()->json(
+                $response,
+                200
+            );
         }
 }

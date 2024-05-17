@@ -2,12 +2,25 @@
 import { reactive, ref, onMounted } from "vue";
 import router from "./../../../router/index.js"
 import IsLoading from '../../components/IsLoading.vue'
+import ForgetPassword from './ForgetPassword.vue'
 
 
 let form = reactive({
     email: "",
     password: "",
 });
+
+
+// Définition des données réactives
+const showPassword = ref(false);
+
+// Méthode pour basculer la visibilité du mot de passe
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value;
+    console.log('showPassword', showPassword.value);
+};
+
+
 
 const isLoading = ref(false);
 
@@ -66,6 +79,7 @@ const login = async () => {
                         S'inscrire
                     </a>
                 </div>
+                <ForgetPassword />
                 <!-- <div role="alert" class="alert relative border rounded-md px-5 py-4 border-primary text-primary dark:border-primary my-7 flex items-center rounded-[0.6rem] border-primary/20 bg-primary/5 px-4 py-3 leading-[1.7]">
                     <div class="">
                         <i data-tw-merge="" data-lucide="lightbulb" class="mr-2 h-7 w-7 fill-primary/10 stroke-[0.8]"></i>
@@ -86,16 +100,37 @@ const login = async () => {
                     <label data-tw-merge="" class="inline-block mb-2 group-[.form-inline]:mb-2 group-[.form-inline]:sm:mb-0 group-[.form-inline]:sm:mr-5 group-[.form-inline]:sm:text-right mt-4">
                         Password*
                     </label>
-                    <input data-tw-merge="" v-model="form.password"  type="password" placeholder="************" class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 block rounded-[0.6rem] border-slate-300/80 px-4 py-3.5">
-                    <!-- <div class="flex mt-4 text-xs text-slate-500 sm:text-sm">
+                    
+                    <input 
+                        data-tw-merge="" 
+                        v-model="form.password" 
+                        :type="showPassword ? 'text' : 'password'" 
+                        placeholder="************" 
+                        class="disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent [&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent transition duration-200 ease-in-out w-full text-sm shadow-sm placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80 [&[type='file']]:border file:mr-4 file:py-2 file:px-4 file:rounded-l-md file:border-0 file:border-r-[1px] file:border-slate-100/10 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-500/70 hover:file:bg-200 group-[.form-inline]:flex-1 group-[.input-group]:rounded-none group-[.input-group]:[&:not(:first-child)]:border-l-transparent group-[.input-group]:first:rounded-l group-[.input-group]:last:rounded-r group-[.input-group]:z-10 block rounded-[0.6rem] border-slate-300/80 px-4 py-3.5"
+                    >
+                
+                    <div class="password-toggle" @click="togglePasswordVisibility">
+                        <span v-show="showPassword" >
+                            
+                            <i data-tw-merge data-lucide="eye-off" class="stroke-[1] w-5 h-5 mx-auto block mx-auto block"></i>
+                        </span>
+                        <span v-show="!showPassword">
+                            <i data-tw-merge data-lucide="eye" class="stroke-[1] w-5 h-5 mx-auto block mx-auto block"></i>
+
+
+                        </span>
+                    </div>
+     
+                    <div class="flex mt-4 text-xs text-slate-500 sm:text-sm">
                         <div class="flex items-center mr-auto">
                             <input data-tw-merge="" type="checkbox" class="transition-all duration-100 ease-in-out shadow-sm border-slate-200 cursor-pointer rounded focus:ring-4 focus:ring-offset-0 focus:ring-primary focus:ring-opacity-20 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 [&[type='radio']]:checked:bg-primary [&[type='radio']]:checked:border-primary [&[type='radio']]:checked:border-opacity-10 [&[type='checkbox']]:checked:bg-primary [&[type='checkbox']]:checked:border-primary [&[type='checkbox']]:checked:border-opacity-10 [&:disabled:not(:checked)]:bg-slate-100 [&:disabled:not(:checked)]:cursor-not-allowed [&:disabled:not(:checked)]:dark:bg-darkmode-800/50 [&:disabled:checked]:opacity-70 [&:disabled:checked]:cursor-not-allowed [&:disabled:checked]:dark:bg-darkmode-800/50 mr-2.5 border" id="remember-me">
                             <label class="cursor-pointer select-none" for="remember-me">
-                                Remember me
+                                Se souvenir de moi
                             </label>
                         </div>
-                        <a href="#">Forgot Password?</a>
-                    </div> -->
+                        <a href="#" data-tw-merge data-tw-toggle="modal" data-tw-target="#forget-password-modal-preview">Mot de passe oublié?</a>
+                    </div>
+                    
                     <div class="mt-5 text-center xl:mt-8 xl:text-left">
                        <IsLoading v-if="isLoading" />
 
@@ -122,3 +157,22 @@ const login = async () => {
     </div>
 </div>
 </template>
+
+<style scoped>
+    .password-toggle {
+        position: absolute;
+        top: 61%;
+        right: 10px; /* ajustez ceci selon vos besoins */
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Ajustez la position du champ de mot de passe pour laisser de l'espace pour l'icône */
+    .form-input input {
+        padding-right: 30px; /* Ajoutez de l'espace à droite pour l'icône */
+    }
+</style>

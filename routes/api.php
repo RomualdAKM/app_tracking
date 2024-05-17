@@ -32,17 +32,18 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('register','register');
     Route::post('login','login');
     Route::get('get_info_auth_user','get_info_auth_user');
-   
+    Route::post('forgot_password','forgot_password');
+    Route::post('reset_password','reset_password');
 });
 
-Route::controller(CompanyController::class)->group(function(){
 
+
+Route::controller(CompanyController::class)->group(function(){
     Route::post('save_company','save_company');
     Route::post('update_company/{id}','update_company');
     Route::get('get_companies','get_companies');
     Route::get('delete_company/{id}','delete_company');
     Route::get('get_company/{id}','get_company');
-
 });
 
 Route::controller(DriverController::class)->group(function(){
