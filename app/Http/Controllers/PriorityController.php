@@ -346,11 +346,13 @@ class PriorityController extends Controller
                                 ->where('type_priority','Assurance')
                                 ->with('vehicle')
                                 ->get();
+
         // $insurances = Priority::where('company_id', Auth::user()->company_id)
         //                         ->where('type_priority','Assurance')
                                     // ->with('vehicle')
 
         //                         ->get();
+        
         
         return $insurances;
 

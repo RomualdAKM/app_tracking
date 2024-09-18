@@ -50,13 +50,9 @@ const deleteDriver =  (driverId) => {
 }
 
 onMounted (async() => {
-
     if(drivers.value && drivers.value.length > 0) {
-
         initDataTable()
-
     }
-
     await  getDrivers()
      
 })

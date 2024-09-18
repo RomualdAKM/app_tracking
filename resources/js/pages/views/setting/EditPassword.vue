@@ -16,9 +16,7 @@ const getAuthUser = async () => {
     console.log('user', response.data)
 }
 
-
 const isLoading = ref(false);
-
 
 const resetPassword = async () => {
     isLoading.value = true; // Activation du chargement

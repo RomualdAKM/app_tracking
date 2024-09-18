@@ -10,7 +10,6 @@ let form = reactive({
     password: "",
 });
 
-
 // Définition des données réactives
 const showPassword = ref(false);
 

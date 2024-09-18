@@ -159,7 +159,6 @@ class SimplebreakdownController extends Controller
 
    public function get_count_simple_breakdown_by_month($vehicleId){
 
-
     // Obtenir la date actuelle
     $now = Carbon::now();
     
